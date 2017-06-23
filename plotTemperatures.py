@@ -38,7 +38,7 @@ def main():
        plt.text(0, -60, year, horizontalalignment='center') 
        
        # Now save the plot in an image file.
-       filename = "%s.png" % year
+       filename = "%03d.png" % time
        plt.savefig(filename, bbox_inches='tight', pad_inches=0)
        
        # Discard the figure (otherwise the text will be overwritten
