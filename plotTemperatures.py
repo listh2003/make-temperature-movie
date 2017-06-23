@@ -25,7 +25,7 @@ def main():
     icat.add_year(temperatures, 'time')
     
     # Set the end index for the loop over years, and do the loop.
-    tmax = 2
+    tmax = 146
     for time in range(0, tmax):
 
        # Contour plot the temperatures and add the coastline.
