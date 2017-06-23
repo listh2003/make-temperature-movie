@@ -13,6 +13,8 @@ import iris.plot as iplt
 import iris.quickplot as qplt
 import iris.coord_categorisation as icat
 
+from spawnCommand import SpawnCommand
+
 def main():
     # Read all the temperature values.
     temperatures = iris.load_cube('temperatures.pp')
@@ -44,6 +46,11 @@ def main():
        # Discard the figure (otherwise the text will be overwritten
        # by the next iteration).
        plt.close()
+
+    # Now make the movie from the image files by spawning the ffmpeg command.
+    # The options (of which there are many) are somewhat arcane, but these ones work.
+    options = "-r 5 -vcodec png -y -i %03d.png -r 5 -vcodec msmpeg4v2 -qblur 0.01 -qscale 5"
+    SpawnCommand("ffmpeg " + options + " plotTemperatures.avi")
 
 if __name__ == '__main__':
     main()
