@@ -32,18 +32,23 @@ def main():
 
     # Add a new coordinate containing the year.
     icat.add_year(temperatures, 'time')
+    years = temperatures.coord('year')
     
-    # Set the limits for the loop over years, output them, and do the loop.
+    # Set the limits for the loop over years.  
     minTime = 0
     maxTime = temperatures.shape[0]
 
-    years = temperatures.coord('year')
-    print "Making images from year", years[minTime].points[0], "to", years[maxTime-1].points[0]
+    # We've seen that the labels in the years coordinate can be wrong (rcp26 is missing 2009 & 2010,
+    # rcp85 is missing 2069 & 2092).  So we'll use our own contiguous labels here, starting from the
+    # first label in the years coordinate.
+    myYears = years[minTime].points[0] + np.arange(maxTime)
+
+    print "Making images from year", myYears[minTime], "to", myYears[maxTime-1]
 
     for time in range(minTime, maxTime):
 
        # Contour plot the temperatures and add the coastline.
-       iplt.contourf(temperatures[time], 15, vmin=minTemp, vmax=maxTemp, cmap='hot')
+       iplt.contourf(temperatures[time], 10, vmin=minTemp, vmax=maxTemp, cmap='hot')
        plt.gca().coastlines()
        
        # We need to fix the boundary of the figure (otherwise we get a black border at left & top).
@@ -55,7 +60,7 @@ def main():
 
        # Extract the year value and display it (coordinates used in locating the text are
        # those of the data).
-       year = years[time].points[0]
+       year = myYears[time]
        plt.text(0, -60, year, horizontalalignment='center') 
        
        # Now save the plot in an image file.  The files are numbered sequentially, starting
