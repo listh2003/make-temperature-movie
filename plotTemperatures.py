@@ -16,6 +16,12 @@ import iris.coord_categorisation as icat
 from spawnCommand import SpawnCommand
 
 def main():
+
+    # Delete all the image files in the current directory to ensure that only those
+    # created in the loop end up in the movie.
+    print "Deleting all .png files in this directory..."
+    SpawnCommand("rm *.png")
+
     # Read all the temperature values.
     temperatures = iris.load_cube('temperatures.pp')
     
