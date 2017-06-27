@@ -45,6 +45,13 @@ def main():
        # Contour plot the temperatures and add the coastline.
        iplt.contourf(temperatures[time], 15, vmin=minTemp, vmax=maxTemp, cmap='hot')
        plt.gca().coastlines()
+       
+       # We need to fix the boundary of the figure (otherwise we get a black border at left & top).
+       # Cartopy removes matplotlib's axes.patch (which normally defines the boundary) and
+       # replaces it with outline_patch and background_patch.  It's the former which is causing
+       # the black border.  Get the axis object and make its outline patch invisible.
+       ax = plt.gca()
+       ax.outline_patch.set_visible(False)
 
        # Extract the year value and display it (coordinates used in locating the text are
        # those of the data).
