@@ -38,12 +38,7 @@ def main():
     minTime = 0
     maxTime = temperatures.shape[0]
 
-    # We've seen that the labels in the years coordinate can be wrong (rcp26 is missing 2009 & 2010,
-    # rcp85 is missing 2069 & 2092).  So we'll use our own contiguous labels here, starting from the
-    # first label in the years coordinate.
-    myYears = years[minTime].points[0] + np.arange(maxTime)
-
-    print "Making images from year", myYears[minTime], "to", myYears[maxTime-1]
+    print "Making images from year", years[minTime].points[0], "to", years[maxTime-1].points[0]
 
     for time in range(minTime, maxTime):
 
@@ -60,7 +55,7 @@ def main():
 
        # Extract the year value and display it (coordinates used in locating the text are
        # those of the data).
-       year = myYears[time]
+       year = years[time].points[0]
        plt.text(0, -60, year, horizontalalignment='center') 
        
        # Now save the plot in an image file.  The files are numbered sequentially, starting
