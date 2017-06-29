@@ -49,7 +49,6 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
     # Set the end index for the loop over years, and do the loop.
     tmin = 0
     tmax = cube.shape[0]
-    tmax = 10
 
     # We want the files to be numbered sequentially, starting
     # from 000.png; this is so that the ffmpeg command can grok them.
@@ -65,8 +64,8 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         plt.margins(0,0)
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
 
-        iplt.contourf(cube[time], 15, vmin=scaleLBound, vmax=scaleUBound, cmap='RdBu_r')
-        plt.gca().coastlines()
+        iplt.contourf(cube[time], 10, vmin=scaleLBound, vmax=scaleUBound, cmap='gnuplot2')
+        plt.gca().coastlines(color='w')
         # plt.figure(frameon=False)
 
         # Extract the year value and display it (coordinates used are
@@ -74,7 +73,7 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         year = cube.coord('year')[time].points[0]
 
         plt.text(-160, 0, year, horizontalalignment='center', size='large',
-	         fontdict={'family' : 'monospace'})
+	         fontdict={'family' : 'monospace'}, color='w')
         filename = str(foldername) + '/' + "%03d.png" % index
         print('Now plotting: ',filename)
         plt.savefig(filename, dpi=200)
@@ -103,6 +102,10 @@ def main():
     # Calculate the difference in annual mean temperature from the mean industrial baseline (returns a cube)
     worstdiff = worstcase - meanindustrial
     bestdiff = bestcase - meanindustrial
+
+    # Truncate the datasets so they both start in 1960.
+    worstdiff = worstdiff[100:, :, :]
+    bestdiff = bestdiff[100:, :, :]
 
     worstbounds = getlimits(worstdiff)
     bestbounds = getlimits(bestdiff)
