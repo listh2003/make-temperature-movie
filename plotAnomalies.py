@@ -22,6 +22,7 @@ def scaleBar(minVal, maxVal):
         currentValue += degreeStep
     return barArray
 
+
 def getlimits(cube):
 
     minTemp = np.amin(cube.data)
@@ -33,6 +34,7 @@ def getlimits(cube):
     limits = [lowerBound,upperBound]
 
     return limits
+
 
 def plotrun(cube, foldername, scaleLBound, scaleUBound):
     # Add a new coordinate containing the year.
@@ -56,8 +58,6 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         geo_axes.outline_patch.set_visible(False)
         plt.margins(0,0)
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
-
-
 
         iplt.contourf(cube[time], 15, vmin=scaleLBound, vmax=scaleUBound, cmap='RdBu_r')
         plt.gca().coastlines()
@@ -101,21 +101,18 @@ def main():
     worstbounds = getlimits(worstdiff)
     bestbounds = getlimits(bestdiff)
 
-    lowerBound = min(worstbounds[0],bestbounds[0])
-    upperBound = max(worstbounds[1],bestbounds[1])
+    lowerBound = min(worstbounds[0], bestbounds[0])
+    upperBound = max(worstbounds[1], bestbounds[1])
 
     print('Scale set to Min:',lowerBound,'K')
     print('Scale set to Max:',upperBound,'K')
 
     #Run both cubes
-    plotcubes = [worstdiff,bestdiff]
+    plotcubes = [worstdiff, bestdiff]
     plotfldrname = ['rcp85','rcp26']
-    #Run one cube
-    #plotcubes = [bestdiff]
-    #plotfldrname = ['rcp26']
 
     for val, curcube in enumerate(plotcubes):
-        plotrun(curcube, plotfldrname[val],lowerBound,upperBound)
+        plotrun(curcube, plotfldrname[val], lowerBound, upperBound)
 
 
 if __name__ == '__main__':
