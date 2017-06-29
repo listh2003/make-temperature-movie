@@ -37,6 +37,12 @@ def getlimits(cube):
 
 
 def plotrun(cube, foldername, scaleLBound, scaleUBound):
+
+    # Delete all the image files in the directory to ensure that only those
+    # created in the loop end up in the movie.
+    print "Deleting all .png files in the " + foldername + " directory..."
+    SpawnCommand("rm " + foldername +"/*.png")
+
     # Add a new coordinate containing the year.
     icat.add_year(cube, 'time')
 
