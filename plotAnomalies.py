@@ -44,6 +44,9 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
     tmin = 0
     tmax = cube.shape[0]
 
+    # We want the files to be numbered sequentially, starting
+    # from 000.png; this is so that the ffmpeg command can grok them.
+    index = 0
     #scaleBarArray = scaleBar(lowerBound, upperBound)
     for time in range(tmin, tmax):
 
@@ -67,15 +70,16 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
 
         # plt.title('Temperature Anomaly From Pre-Industrial Mean')
         plt.text(0, -60, year, horizontalalignment='center')
-        filename = str(foldername) + '/' + str(year) + '.png'
+        filename = str(foldername) + '/' + "%03d.png" % index
         print('Now plotting: ',filename)
         plt.savefig(filename, dpi=200)
         plt.close()
+        index += 1
 
 def main():
     # Read all the temperature values.
-    worstfilenames=('temperatures.pp','temp-rcp85.pp')
-    bestfilenames = ('temperatures.pp', 'temp-rcp26.pp')
+    worstfilenames = ('temp-hist.pp','temp-rcp85.pp')
+    bestfilenames = ('temp-hist.pp', 'temp-rcp26.pp')
     # Load a cube with both the historical and future prediction (worst case) data as a single cube
     worstcase = iris.load_cube(worstfilenames)
     bestcase = iris.load_cube(bestfilenames)
