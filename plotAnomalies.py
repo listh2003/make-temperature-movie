@@ -64,8 +64,8 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         plt.margins(0,0)
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
 
-        iplt.contourf(cube[time], 10, vmin=scaleLBound, vmax=scaleUBound, cmap='gnuplot2')
-        plt.gca().coastlines(color='w')
+        iplt.contourf(cube[time], 10, vmin=scaleLBound, vmax=scaleUBound, cmap='YlOrRd')
+        plt.gca().coastlines(color='b')
         # plt.figure(frameon=False)
 
         # Extract the year value and display it (coordinates used are
@@ -73,7 +73,7 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         year = cube.coord('year')[time].points[0]
 
         plt.text(-160, 0, year, horizontalalignment='center', size='large',
-	         fontdict={'family' : 'monospace'}, color='w')
+	         fontdict={'family' : 'monospace'}, color='b')
         filename = str(foldername) + '/' + "%03d.png" % index
         print('Now plotting: ',filename)
         plt.savefig(filename, dpi=200)
