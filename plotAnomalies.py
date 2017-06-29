@@ -73,8 +73,8 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         # those of the data).
         year = cube.coord('year')[time].points[0]
 
-        # plt.title('Temperature Anomaly From Pre-Industrial Mean')
-        plt.text(0, -60, year, horizontalalignment='center')
+        plt.text(-160, 0, year, horizontalalignment='center', size='large',
+	         fontdict={'family' : 'monospace'})
         filename = str(foldername) + '/' + "%03d.png" % index
         print('Now plotting: ',filename)
         plt.savefig(filename, dpi=200)
