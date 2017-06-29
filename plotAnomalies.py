@@ -10,6 +10,7 @@ from cartopy import config
 import cartopy.crs as ccrs
 import math
 
+import numpy as np
 from spawnCommand import SpawnCommand
 
 def scaleBar(minVal, maxVal):
@@ -22,16 +23,12 @@ def scaleBar(minVal, maxVal):
     return barArray
 
 def getlimits(cube):
-    maxTempDifftime = cube.collapsed('time', iris.analysis.MAX)
-    maxTempDifflat = maxTempDifftime.collapsed('latitude',iris.analysis.MAX)
-    maxTempDiff = maxTempDifflat.collapsed('longitude',iris.analysis.MAX)
 
-    minTempDifftime = cube.collapsed('time', iris.analysis.MIN)
-    minTempDifflat = minTempDifftime.collapsed('latitude',iris.analysis.MIN)
-    minTempDiff = minTempDifflat.collapsed('longitude',iris.analysis.MIN)
+    minTemp = np.amin(cube.data)
+    maxTemp = np.amax(cube.data)
 
-    lowerBound = math.floor(minTempDiff.data)
-    upperBound = math.ceil(maxTempDiff.data)
+    lowerBound = math.floor(minTemp)
+    upperBound = math.ceil(maxTemp)
 
     limits = [lowerBound,upperBound]
 
@@ -44,6 +41,7 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
     # Set the end index for the loop over years, and do the loop.
     tmin = 0
     tmax = cube.shape[0]
+    tmax = 10
 
     # We want the files to be numbered sequentially, starting
     # from 000.png; this is so that the ffmpeg command can grok them.
