@@ -10,6 +10,7 @@ from cartopy import config
 import cartopy.crs as ccrs
 import math
 
+from spawnCommand import SpawnCommand
 
 def scaleBar(minVal, maxVal):
     degreeStep = 1
@@ -75,6 +76,14 @@ def plotrun(cube, foldername, scaleLBound, scaleUBound):
         plt.savefig(filename, dpi=200)
         plt.close()
         index += 1
+
+    # Now make the movie from the image files by spawning the ffmpeg command.
+    # The options (of which there are many) are somewhat arcane, but these ones work.
+    print "Converting images to movie..."
+    options = ("-r 5 -vcodec png -y -i " + foldername
+             + "/%03d.png -r 5 -vcodec msmpeg4v2 -qblur 0.01 -qscale 5 ")
+    SpawnCommand("ffmpeg " + options + foldername + ".avi")
+
 
 def main():
     # Read all the temperature values.
