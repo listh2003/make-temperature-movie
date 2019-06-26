@@ -32,7 +32,7 @@ def main():
     print("Loading the data...")
     cubes = iris.cube.CubeList([])
     months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-    for i in range(1850, 2015):
+    for i in range(1850, 1900):
         for month in months:
             tempfile = 'tas_1850-2014/bc179a.p5' + str(i) + month + '.nc'
             cubes.append(iris.load_cube(tempfile))
@@ -40,8 +40,8 @@ def main():
     print("Data downloaded! Now Processing...")
 
     # Get the range of values.
-    minTemp = np.amin(temperatures.data)
-    maxTemp = np.amax(temperatures.data)
+    minTemp = np.nanmin(temperatures.data)
+    maxTemp = np.nanmax(temperatures.data)
     print ("Range of temperatures is ", minTemp, "ºK to ", maxTemp, "ºK.")
 
     # Add a new coordinate containing the year.
