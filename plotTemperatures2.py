@@ -40,8 +40,13 @@ def main():
     print("Data downloaded! Now Processing...")
 
     # Get the range of values.
+<<<<<<< HEAD
     minTemp = np.nanmin(temperatures.data)
     maxTemp = np.nanmax(temperatures.data)
+=======
+    minTemp = np.amin(temperatures.data)
+    maxTemp = np.amax(temperatures.data)
+>>>>>>> b2e499239cb4f1630ac25ddba5a85168177a62f1
     print ("Range of temperatures is ", minTemp, "ºK to ", maxTemp, "ºK.")
 
     # Add a new coordinate containing the year.
