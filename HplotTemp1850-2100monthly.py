@@ -38,7 +38,7 @@ def main():
             cubes.append(iris.load_cube(tempfile))
     for i in range(2015, 2101):
         for month in months:
-            tempfile = 'tas_2015-2100/bh409a.p5' + str(i) + month + '.nc'
+            tempfile = 'tas_2015-2100-ssp119/bh409a.p5' + str(i) + month + '.nc'
             cubes.append(iris.load_cube(tempfile))
     temperatures = cubes.merge_cube()
     print("Data downloaded! Now Processing...")
