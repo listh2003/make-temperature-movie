@@ -36,7 +36,6 @@ class SpawnCommand():
                 if stderr:
                     for err in stderr.split("\n"):
                         if len(err) > 0:
-<<<<<<< HEAD
                             print (err)
                             
                 if stdout: 
@@ -44,15 +43,6 @@ class SpawnCommand():
                     for line in stdout.split("\n"):
                         if len(line) > 0:
                             print (line)
-=======
-                            print err
-                            
-                if stdout: 
-                    print "-----"
-                    for line in stdout.split("\n"):
-                        if len(line) > 0:
-                            print line
->>>>>>> ee7ed7552e29e1ebc4a8f36c39d1e2588464bbe9
         
         except OSError as exception:
             raise UserWarning("Unable to execute:\n"+cmd+"\nError code = "+str(exception))   
