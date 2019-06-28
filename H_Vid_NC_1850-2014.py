@@ -30,19 +30,30 @@ def main():
     
     # Read all the temperature values and create a single cube containing this data
     print("Loading the data...")
+    
     cubes = iris.cube.CubeList([])
     months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
     for i in range(1850, 2015):
+        monthCubes = iris.cube.CubeList([])
         for month in months:
             tempfile = 'tas_1850-2014/bc179a.p5' + str(i) + month + '.nc'
-            cubes.append(iris.load_cube(tempfile))
+            monthCubes.append(iris.load_cube(tempfile))
+        yearCube = monthCubes.merge_cube()
+        yearTemp = yearCube.collapsed('time', iris.analysis.MEAN)
+        cubes.append(yearTemp)
+        
     temperatures = cubes.merge_cube()
     print("Data downloaded! Now Processing...")
 
     # Get the range of values.
-    minTemp = np.nanmin(temperatures.data)
-    maxTemp = np.nanmax(temperatures.data)
-    print ("Range of temperatures is ", minTemp, "ºK to ", maxTemp, "ºK.")
+
+
+    minTemp = np.amin(temperatures.data)
+    maxTemp = np.amax(temperatures.data)
+
+    
+
+    print ("Range of temperatures is ", minTemp, "K to ", maxTemp, "K.")
 
     # Add a new coordinate containing the year.
     icat.add_year(temperatures, 'time')
@@ -83,13 +94,13 @@ def main():
     print("images made! Now converting to .mp4...")
     
     SpawnCommand("ffmpeg -i image-%04d.png TemperatureVideo1.mp4")
-    SpawnCommand('ffmpeg -i TemperatureVideo1.mp4 -filter:v "setpts=2.0*PTS" TemperatureVideo.mp4')
+    SpawnCommand('ffmpeg -i TemperatureVideo1.mp4 -filter:v "setpts=5.0*PTS" H_NC_1850-2014.mp4')
     print ("Deleting the unneeded images...")
     SpawnCommand("rm -f *.png")
     SpawnCommand("rm -f TemperatureVideo1.mp4")
     print("Opening video...")
     myTime.sleep(5)
-    SpawnCommand("open TemperatureVideo.mp4")
+    SpawnCommand("open H_NC_1850-2014.mp4")
 
 
 if __name__ == '__main__':

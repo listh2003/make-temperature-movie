@@ -36,13 +36,13 @@ class SpawnCommand():
                 if stderr:
                     for err in stderr.split("\n"):
                         if len(err) > 0:
-                            print err
+                            print (err)
                             
                 if stdout: 
-                    print "-----"
+                    print ("-----")
                     for line in stdout.split("\n"):
                         if len(line) > 0:
-                            print line
+                            print (line)
         
         except OSError as exception:
             raise UserWarning("Unable to execute:\n"+cmd+"\nError code = "+str(exception))   

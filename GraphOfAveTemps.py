@@ -14,7 +14,9 @@ decadeAverages = []
 decadeTime = []
 thisDecadeYearlyAverages = []
 
-endYear = 1871
+
+endYear = 2014
+
 
 months = {1:'jan', 2:'feb', 3:'mar', 4:'apr', 5:'may', 6:'jun', 7:'jul', 8:'aug', 9:'sep', 10:'oct', 11:'nov', 12:'dec'}
 for i in range(1850, endYear + 1):
