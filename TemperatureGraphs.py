@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 
     
+#lists needed for the different plots
 monthlyAverages = []
 monthTime = []
 
@@ -14,11 +15,15 @@ decadeAverages = []
 decadeTime = []
 thisDecadeYearlyAverages = []
 
+
+#accepting command line arguments
 'scenario' = sys.argv[1]
 startYear = int(sys.argv[2])
 endYear = int(sys.argv[3])
 
 months = {1:'jan', 2:'feb', 3:'mar', 4:'apr', 5:'may', 6:'jun', 7:'jul', 8:'aug', 9:'sep', 10:'oct', 11:'nov', 12:'dec'}
+
+#loads the data from the correct file, and creates the three different sets of data.
 for i in range(startYear, endYear + 1):
     thisYearMonthlyAverages = []
     for month in range(1, 13):
@@ -49,6 +54,7 @@ for i in range(startYear, endYear + 1):
 
     yearTime.append(i)
 
+    #runs through this code once every ten cycles, for the per decade graph
     if i % 10 == 0:
         decadeAverage = np.mean(thisDecadeYearlyAverages)
         decadeAverages.append(decadeAverage)
@@ -56,8 +62,10 @@ for i in range(startYear, endYear + 1):
         decadeTime.append(i)
 
 
+#plots the figure, with the three different lines.
 plt.figure()
-plt.title('Average temperatures from ' + sys.argv[2]' to 'sys.argv[3] + ', ' + sys.argv[1] + ' scenario.')
+title = 'Average temperatures from ' + sys.argv[2] + ' to ' + sys.argv[3] + ', ' + sys.argv[1] + ' scenario.'
+plt.title(title)
 plt.xlabel('Year')
 plt.ylabel('Average temperature (K)')
 plt.plot(monthTime, monthlyAverages, label = 'monthly averages')
