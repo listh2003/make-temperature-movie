@@ -126,7 +126,7 @@ def main():
 
         # Contour plot the temperatures and add the coastline.
         print(temperatures[time])
-        iplt.contourf(temperatures[time], vmin = Lbound, vmax = Ubound)
+        iplt.contourf(temperatures[time], vmin = Lbound, vmax = Ubound, )
         plt.gca().coastlines()
        
         # We need to fix the boundary of the figure (otherwise we get a black border at left & top).
