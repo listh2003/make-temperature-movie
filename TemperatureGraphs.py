@@ -2,7 +2,7 @@ import iris
 import matplotlib
 import matplotlib.pyplot as plt 
 import numpy as np 
-
+import sys
     
 #lists needed for the different plots
 monthlyAverages = []
@@ -17,7 +17,7 @@ thisDecadeYearlyAverages = []
 
 
 #accepting command line arguments
-'scenario' = sys.argv[1]
+scenario = sys.argv[1]
 startYear = int(sys.argv[2])
 endYear = int(sys.argv[3])
 
