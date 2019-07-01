@@ -2,7 +2,7 @@ import iris
 import matplotlib
 import matplotlib.pyplot as plt 
 import numpy as np 
-
+import matplotlib.animation as animation
     
 monthlyAverages = []
 monthTime = []
@@ -43,9 +43,24 @@ for i in range(1850, endYear + 1):
         thisDecadeYearlyAverages = []
         decadeTime.append(i)
 
+counter = 0
+x = [0]
+y = [0]
 
 
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
 
+def animate(i):
+    global counter, x, y, yearTime, yearlyAverages
+    counter += 1
+    x.append(yearTime[counter-1])
+    y.append(yearlyAverages[counter-1])
+    ax1.clear()
+    plt.plot(x,y,color="blue")
+
+ani = animation.FuncAnimation(fig,animate,interval=50)
+'''
 plt.figure()
 plt.title('Average temperatures from 1850 to ' + str(endYear))
 plt.xlabel('Year')
@@ -53,7 +68,7 @@ plt.ylabel('Average temperature (ºK)')
 plt.plot(monthTime, monthlyAverages, label = 'monthly averages')
 plt.plot(yearTime, yearlyAverages, label = 'yearly averages')
 plt.plot(decadeTime, decadeAverages, label = 'averages per decade')
-
+'''
 
 plt.legend()
 plt.show()
