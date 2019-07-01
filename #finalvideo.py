@@ -111,7 +111,7 @@ def main():
 
         # Contour plot the temperatures and add the coastline.
         
-        iplt.contourf(anomaly[time], levels = (-6, -3, 0, 4, 8, 12, 16, 20, 25), colors = ('darkblue', 'blue', 'cyan', 'lightyellow', 'yellow', 'orange', 'darkorange', 'red'))
+        iplt.contourf(anomaly[time], levels = (-6, -3, 0, 4, 8, 12, 17, 22, 28), colors = ('darkblue', 'blue', 'cyan', 'lightyellow', 'yellow', 'orange', 'darkorange', 'red'))
         #-6.4358826, 27.94899
         plt.gca().coastlines()
         #plt.colorbar(boundaries = (-6, -3, 0, 4, 8, 12, 16, 20, 25), values = (-6, -3, 0, 4, 8, 12, 16, 20))
