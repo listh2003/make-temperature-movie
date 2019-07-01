@@ -55,7 +55,7 @@ def create_video():
 
     #creating the video
     SpawnCommand("ffmpeg -i image-%04d.png TemperatureVideo1.mp4")
-    SpawnCommand('ffmpeg -i TemperatureVideo1.mp4 -filter:v "setpts=5.0*PTS" ssp585.mp4')
+    SpawnCommand('ffmpeg -i TemperatureVideo1.mp4 -filter:v "setpts=5.0*PTS" ' + sys.argv[1] + '.mp4')
     print ("Deleting the unneeded images...")
     SpawnCommand("rm -f *.png")
     SpawnCommand("rm -f TemperatureVideo1.mp4")
@@ -63,6 +63,10 @@ def create_video():
 
 
 def main():
+    if len(sys.argv) != 2:
+        sys.exit("must have an argument")
+    elif sys.argv[1] != 'ssp119' or 'ssp585' or 'ssp534OS':
+        sys.exit("argument must be ssp119, ssp585 or ssp534OS")
 
     # Delete all the image files in the current directory to ensure that only those
     # created in the loop end up in the movie.
@@ -84,8 +88,7 @@ def main():
         cubeList.extend(myload(1960, 2014, 'tas_1850-2014/bc179a.p5'))
         cubeList.extend(myload(2015, 2039, 'tas_2015-2100/be653a.p5'))
         cubeList.extend(myload(2040, 2100, 'tas_2015-2100-ssp534OS/bh409a.p5'))
-    else:
-        sys.exit("argument must be ssp119, ssp585 or ssp534OS")
+    
 
     equalise_attributes(cubeList)
     temperatures = cubeList.merge_cube()
