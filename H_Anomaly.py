@@ -100,10 +100,10 @@ def main():
 
         # Contour plot the temperatures and add the coastline.
         
-        iplt.contourf(anomaly[time], vmin = -6.0, vmax = 20.0, cmap = 'RdYlBu')
+        iplt.contourf(anomaly[time], levels = (-6, -3, 0, 4, 8, 12, 16, 20, 25), colors = ('darkblue', 'blue', 'cyan', 'palegreen', 'lightyellow', 'yellow', 'orange', 'darkorange', 'red'))
         #-6.4358826, 27.94899
         plt.gca().coastlines()
-       
+        plt.colorbar(boundaries = (-6, -3, 0, 4, 8, 12, 16, 20, 25), values = (-6, -3, 0, 4, 8, 12, 16, 20))
         # We need to fix the boundary of the figure (otherwise we get a black border at left & top).
         # Cartopy removes matplotlib's axes.patch (which normally defines the boundary) and
         # replaces it with outline_patch and background_patch.  It's the former which is causing
@@ -115,7 +115,7 @@ def main():
         # those of the data).
         year = years[time].points[0]
         plt.text(0, -60, year, horizontalalignment='center') 
-        plt.colorbar()
+        
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
         # from 000.png; this is so that the ffmpeg command can grok them.
