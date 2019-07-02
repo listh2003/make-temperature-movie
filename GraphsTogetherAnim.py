@@ -12,7 +12,7 @@ plt.ylabel('Temperature (K)')
 lines = []
 
 def init():
-    
+    global lines
     for line in lines:
         line.set_data([],[])
     return lines
@@ -150,7 +150,8 @@ for i in range(2040, 2101):
 print('all data loaded')
 
 def animate(i):
-    global lines, plotlays 
+    
+    lines = []
     if i < 1980:
         x = histmonthTime[i-1]
         y = histmonthAverages[i-1]
@@ -167,7 +168,7 @@ def animate(i):
         x3.append(x)
         y3.append(y)
 
-        plotlays, plotcols = [3], ["mocassin", "sandybrown", "peru"]
+        plotlays, plotcols = [3], ["moccasin", "sandybrown", "peru"]
         
         for i in range(3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
@@ -239,7 +240,7 @@ def animate(i):
 
         plotlays, plotcols = [3], ["lightblue", "dodgerblue", "blue"]
         
-        for i in range(3):
+        for i in range(0, 3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
             lines.append(lobj)
         print('overshoot scenario animated')
