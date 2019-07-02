@@ -63,18 +63,18 @@ for i in range(1850, 2014):
 
 def animate(i):
 
-    x = monthTime[i - 1]
-    y = monthAverages[i - 1]
+    x = monthTime[i]
+    y = monthAverages[i]
     x1.append(x)
     y1.append(y)
 
-    x = yearTime[(i -1)//12]
-    y = yearAverages[(i -1)//12]
+    x = yearTime[(i)//12]
+    y = yearAverages[(i)//12]
     x2.append(x)
     y2.append(y)
 
-    x = decadeTime[(i-1)//120]
-    y = decadeAverages[(i-1)//120]
+    x = decadeTime[(i)//120]
+    y = decadeAverages[(i)//120]
     x3.append(x)
     y3.append(y)
 
