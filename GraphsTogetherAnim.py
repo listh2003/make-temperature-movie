@@ -167,7 +167,7 @@ def animate(i):
         x3.append(x)
         y3.append(y)
 
-        plotlays, plotcols = [3], ["mocassin", "sandybrown", "peru"]
+        plotlays, plotcols = [3], ["moccasin", "sandybrown", "peru"]
         
         for i in range(3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
