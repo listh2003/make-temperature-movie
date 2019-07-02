@@ -34,7 +34,7 @@ yearTime = []
 
 decadeAverages = []
 decadeTime = []
-thisDecadeYearlyAverages = []
+thisDecadeYearAverages = []
 
 
 months = {1:'jan', 2:'feb', 3:'mar', 4:'apr', 5:'may', 6:'jun', 7:'jul', 8:'aug', 9:'sep', 10:'oct', 11:'nov', 12:'dec'}
@@ -63,18 +63,18 @@ for i in range(1850, 2014):
 
 def animate(i):
 
-    x = monthTime[i - 1]
-    y = monthAverages[i - 1]
+    x = monthTime[i]
+    y = monthAverages[i]
     x1.append(x)
     y1.append(y)
 
-    x = yearTime[(i -1)//12]
-    y = yearAverages[(i -1)//12]
+    x = yearTime[(i)//12]
+    y = yearAverages[(i)//12]
     x2.append(x)
     y2.append(y)
 
-    x = decadeTime[(i-1)//120]
-    y = decadeAverages[(i-1)//120]
+    x = decadeTime[(i)//120]
+    y = decadeAverages[(i)//120]
     x3.append(x)
     y3.append(y)
 
