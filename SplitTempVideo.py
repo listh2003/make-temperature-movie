@@ -123,8 +123,9 @@ def main():
     for time in range(minTime, maxTime):
 
         # Set up for larger image.
-        fig = plt.figure(figsize=(6,3), dpi=200)
-        rect = 0,0,1200,600
+        figSize = [6, 3]
+        fig = plt.figure(figsize=figSize, dpi=200)
+        rect = 0,0,200*figSize[0],200*figSize[1]
         fig.add_axes(rect)
         geo_axes = plt.axes(projection=ccrs.PlateCarree())
 
@@ -160,7 +161,7 @@ def main():
 	         fontdict={'family' : 'monospace'})
         plt.text(  70, -60, str(sys.argv[2]), horizontalalignment='center', size='small',
 	         fontdict={'family' : 'monospace'})
-        
+
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
         # from 000.png; this is so that the ffmpeg command can grok them.
