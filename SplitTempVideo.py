@@ -55,12 +55,10 @@ def myload(start, end, string):
 def create_video():
 
     #creating the video
-    SpawnCommand("ffmpeg -i image-%04d.png TemperatureVideo1.mp4")
-    SpawnCommand('ffmpeg -i TemperatureVideo1.mp4 -filter:v "setpts=5.0*PTS" ' + sys.argv[1] + '.mp4')
-    print ("Deleting the unneeded images...")
-#    SpawnCommand("rm -f *.png")
-#    SpawnCommand("rm -f TemperatureVideo1.mp4")
-    
+    print "Converting images to movie..."
+    options = ("-r 5 -vcodec png -y -i " 
+             + "image-%04d.png -r 5 -vcodec msmpeg4v2 -qblur 0.01 -qscale 5 ")
+    SpawnCommand("ffmpeg " + options + "split.avi")
 
 
 def main():
