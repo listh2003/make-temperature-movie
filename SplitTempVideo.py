@@ -148,14 +148,18 @@ def main():
         year = years[time].points[0]
 
         # Display year on both sides of the display.
-        plt.text(-160, 0, year, horizontalalignment='center', size='large',
+        plt.text(-110, 0, year, horizontalalignment='center', 
+	         verticalalignment='top', size='large',
 	         fontdict={'family' : 'monospace'})
-        plt.text( 100, 0, year, horizontalalignment='center', size='large',
-	         fontdict={'family' : 'monospace'})
+        plt.text( 70, 0, year, horizontalalignment='center', 
+	         verticalalignment='top', size='large',
+		 fontdict={'family' : 'monospace'})
 
         # Add labels to halves of display.
-        plt.text(-100, -60, str(sys.argv[1]), horizontalalignment='center')
-        plt.text(  60, -60, str(sys.argv[2]), horizontalalignment='center')
+        plt.text(-110, -60, str(sys.argv[1]), horizontalalignment='center', size='small',
+	         fontdict={'family' : 'monospace'})
+        plt.text(  70, -60, str(sys.argv[2]), horizontalalignment='center', size='small',
+	         fontdict={'family' : 'monospace'})
         
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
