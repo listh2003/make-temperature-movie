@@ -173,7 +173,8 @@ def animate(i):
         for i in range(3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
             lines.append(lobj)
-        print('historical data animated')
+    
+
 
     elif i < 3012:
         x = bestmonthTime[i-1]
@@ -244,6 +245,13 @@ def animate(i):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
             lines.append(lobj)
         print('overshoot scenario animated')
+    if i == 1980:
+        print('historic data animated')
+    elif i == 3012:
+        print('ssp119 data animated')
+    elif i == 4044:
+        print('ssp585 data animated')
+    
     xlist = [x1, x2, x3]
     ylist = [y1, y2, y3]
 
@@ -254,7 +262,7 @@ def animate(i):
     return lines
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
-print('loading')
+print('ssp534OS data animated. Now loading')
 anim = animation.FuncAnimation(fig, animate, init_func=init, blit=True,
                                frames=3012, interval=10)
 
