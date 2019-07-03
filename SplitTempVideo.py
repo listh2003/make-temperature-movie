@@ -161,6 +161,10 @@ def main():
 	         fontdict={'family' : 'monospace'})
         plt.text(  70, -60, str(sys.argv[2]), horizontalalignment='center', size='small',
 	         fontdict={'family' : 'monospace'})
+		 
+	# Draw a line along the division between the two halves.
+	plt.plot([0, 0], [-90, 90], color='gray', linewidth=3)
+	plt.plot([-179, -179], [-90, 90], color='gray', linewidth=3)
 
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
