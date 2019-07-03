@@ -4,7 +4,7 @@ import numpy as np
 import iris
 
 fig = plt.figure()
-ax1 = plt.axes(xlim=(1850, 2100), ylim=(273, 280))
+ax1 = plt.axes(xlim=(1850, 2015), ylim=(273, 280))
 line, = ax1.plot([], [], lw=2)
 plt.xlabel('Year')
 plt.ylabel('Temperature (K)')
@@ -62,22 +62,22 @@ for i in range(1850, 2014):
 
 
 def animate(i):
-
-    x = monthTime[i]
-    y = monthAverages[i]
+    print('.')
+    x = monthTime[i-1]
+    y = monthAverages[i-1]
     x1.append(x)
     y1.append(y)
 
-    x = yearTime[(i)//12]
-    y = yearAverages[(i)//12]
+    x = yearTime[(i-1)//12]
+    y = yearAverages[(i-1)//12]
     x2.append(x)
     y2.append(y)
 
-    x = decadeTime[(i)//120]
-    y = decadeAverages[(i)//120]
+    x = decadeTime[(i-1)//120]
+    y = decadeAverages[(i-1)//120]
     x3.append(x)
     y3.append(y)
-
+    
     xlist = [x1, x2, x3]
     ylist = [y1, y2, y3]
 
@@ -89,8 +89,8 @@ def animate(i):
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
 anim = animation.FuncAnimation(fig, animate, init_func=init, blit=True,
-                               frames=3012, interval=10)
+                               frames=1980, interval=10)
 
-anim.save('graphAnimation.mp4', fps=100, extra_args=['-vcodec', 'libx264'])
+anim.save('graphAnimation.mp4', fps=300)
 
 plt.show()
