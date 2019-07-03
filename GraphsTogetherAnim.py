@@ -9,10 +9,9 @@ line, = ax1.plot([], [], lw=2)
 plt.xlabel('Year')
 plt.ylabel('Temperature (K)')
 
-lines = []
+
 
 def init():
-    global lines
     for line in lines:
         line.set_data([],[])
     return lines
@@ -149,26 +148,28 @@ for i in range(2040, 2101):
         print('another decade done')
 print('all data loaded')
 
+counter = -1
 def animate(i):
-    
+    global lines, counter
     lines = []
-    if i < 1980:
-        x = histmonthTime[i-1]
-        y = histmonthAverages[i-1]
+    counter += 1
+    if counter < 1980:
+        x = histmonthTime[counter]
+        y = histmonthAverages[counter]
         x1.append(x)
         y1.append(y)
 
-        x = histyearTime[(i-1)//12]
-        y = histyearAverages[(i-1)//12]
+        x = histyearTime[(counter)//12]
+        y = histyearAverages[(counter)//12]
         x2.append(x)
         y2.append(y)
 
-        x = histdecadeTime[(i-1)//120]
-        y = histdecadeAverages[(i-1)//120]
+        x = histdecadeTime[(counter)//120]
+        y = histdecadeAverages[(counter)//120]
         x3.append(x)
         y3.append(y)
 
-        plotlays, plotcols = [3], ["moccasin", "sandybrown", "peru"]
+        plotcols = ["moccasin", "sandybrown", "peru"]
         
         for i in range(3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
@@ -176,80 +177,80 @@ def animate(i):
     
 
 
-    elif i < 3012:
-        x = bestmonthTime[i-1]
-        y = bestmonthAverages[i-1]
+    elif counter < 3012:
+        x = bestmonthTime[counter]
+        y = bestmonthAverages[counter]
         x1.append(x)
         y1.append(y)
 
-        x = bestyearTime[(i-1)//12]
-        y = bestyearAverages[(i-1)//12]
+        x = bestyearTime[(counter)//12]
+        y = bestyearAverages[(counter)//12]
         x2.append(x)
         y2.append(y)
 
-        x = bestdecadeTime[(i-1)//120]
-        y = bestdecadeAverages[(i-1)//120]
+        x = bestdecadeTime[(counter)//120]
+        y = bestdecadeAverages[(counter)//120]
         x3.append(x)
         y3.append(y)
 
         
 
-        plotlays, plotcols = [3], ["palegreen", "chartreuse", "darkgreen"]
-        
+        plotcols = ["palegreen", "chartreuse", "darkgreen"]
+    
         for i in range(3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
             lines.append(lobj)
         print('best case scenario animated')
 
     elif i < 4044:
-        x = worstmonthTime[i-1]
-        y = worstmonthAverages[i-1]
+        x = worstmonthTime[counter]
+        y = worstmonthAverages[counter]
         x1.append(x)
         y1.append(y)
 
-        x = worstyearTime[(i-1)//12]
-        y = worstyearAverages[(i-1)//12]
+        x = worstyearTime[(counter)//12]
+        y = worstyearAverages[(counter)//12]
         x2.append(x)
         y2.append(y)
 
-        x = worstdecadeTime[(i-1)//120]
-        y = worstdecadeAverages[(i-1)//120]
+        x = worstdecadeTime[(counter)//120]
+        y = worstdecadeAverages[(counter)//120]
         x3.append(x)
         y3.append(y)
 
-        plotlays, plotcols = [3], ["lightcoral", "firebrick", "red"]
+        plotcols = ["lightcoral", "firebrick", "red"]
         
         for i in range(3):
             lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
             lines.append(lobj)
         print('worst case scenario animated')
     elif i < 4776:
-        x = OSmonthTime[i-1]
-        y = OSmonthAverages[i-1]
+        x = OSmonthTime[counter]
+        y = OSmonthAverages[counter]
         x1.append(x)
         y1.append(y)
 
-        x = OSyearTime[(i-1)//12]
-        y = OSyearAverages[(i-1)//12]
+        x = OSyearTime[(counter)//12]
+        y = OSyearAverages[(counter)//12]
         x2.append(x)
         y2.append(y)
 
-        x = OSdecadeTime[(i-1)//120]
-        y = OSdecadeAverages[(i-1)//120]
+        x = OSdecadeTime[(counter)//120]
+        y = OSdecadeAverages[(counter)//120]
         x3.append(x)
         y3.append(y)
 
         plotlays, plotcols = [3], ["lightblue", "dodgerblue", "blue"]
         
-        for i in range(0, 3):
-            lobj = ax1.plot([],[],lw=2,color=plotcols[i])[0]
+        for index in range(0, 3):
+            lobj = ax1.plot([],[],lw=2,color=plotcols[index])[0]
             lines.append(lobj)
         print('overshoot scenario animated')
-    if i == 1980:
+    if counter == 1980:
         print('historic data animated')
-    elif i == 3012:
+    elif counter == 3012:
         print('ssp119 data animated')
-    elif i == 4044:
+    elif counter == 4044:
         print('ssp585 data animated')
     
     xlist = [x1, x2, x3]
@@ -264,7 +265,7 @@ def animate(i):
 # call the animator.  blit=True means only re-draw the parts that have changed.
 print('ssp534OS data animated. Now loading')
 anim = animation.FuncAnimation(fig, animate, init_func=init, blit=True,
-                               frames=3012, interval=10)
+                               frames=4776, interval=10)
 
 print('saving')
 anim.save('graphAnimation.mp4', fps=100, extra_args=['-vcodec', 'libx264'])
