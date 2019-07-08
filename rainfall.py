@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from iris.experimental.equalise_cubes import equalise_attributes
 from spawnCommand import SpawnCommand
 import iris.plot as iplt
+import iris.coord_categorisation as icat
 
 
 def create_video():
@@ -32,12 +33,10 @@ def myload():
 def main():
 
     cube = myload()
-    
-    
-    '''
-    icat.add_year(anomaly, 'time')
-    years = anomaly.coord('year')
-    '''
+
+    icat.add_month(cube, 'time')
+    months = cube.coord('month')
+
     # Set the limits for the loop over years.  
     minTime = 0
     maxTime = 90
@@ -63,9 +62,15 @@ def main():
 
         # Extract the year value and display it (coordinates used in locating the text are
         # those of the data).
-        '''
-        plt.text(0, -60, year, horizontalalignment='center') 
-        '''
+        month = months[time].points[0]
+
+        # Display year on both sides of the display.
+        plt.text(-110, 0, month, horizontalalignment='center', 
+	         verticalalignment='top', size='large',
+	         fontdict={'family' : 'monospace'})
+        plt.text( 70, 0, month, horizontalalignment='center', 
+	         verticalalignment='top', size='large',
+		 fontdict={'family' : 'monospace'})
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
         # from 000.png; this is so that the ffmpeg command can grok them.
