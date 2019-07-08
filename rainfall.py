@@ -10,17 +10,17 @@ import iris.plot as iplt
 def create_video():
 
     #creating the video
-    SpawnCommand("ffmpeg -i image-%04d.png TemperatureVideo1.mp4")
-    SpawnCommand('ffmpeg -i TemperatureVideo1.mp4 -filter:v "setpts=5.0*PTS" gpp.mp4')
+    SpawnCommand("ffmpeg -i rainfall/image-%04d.png rainfall/temp.mp4")
+    SpawnCommand('ffmpeg -i rainfall/temp.mp4 -filter:v "setpts=5.0*PTS" rainfall/rainfall.mp4')
     print ("Deleting the unneeded images...")
-    SpawnCommand("rm -f *.png")
-    SpawnCommand("rm -f TemperatureVideo1.mp4")
+#    SpawnCommand("rm -f *.png")
+    SpawnCommand("rm -f rainfall/temp.mp4")
     
 
 def myload():
     cubes = iris.cube.CubeList([])
     
-    for i in range(1, 11, 3):
+    for i in range(1, 2, 3):
         tempfile = 'tpr_1850/bc179a.pj1850' + str("{:02d}".format(i)) + '01.nc'
         blockcube = iris.load_cube(tempfile)    
         cubes.append(blockcube)
@@ -40,7 +40,7 @@ def main():
     '''
     # Set the limits for the loop over years.  
     minTime = 0
-    maxTime = 360
+    maxTime = 90
 
     
     
@@ -69,7 +69,7 @@ def main():
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
         # from 000.png; this is so that the ffmpeg command can grok them.
-        filename = "image-%04d.png" % time
+        filename = "rainfall/image-%04d.png" % time
         plt.savefig(filename, bbox_inches='tight', pad_inches=0)
         
         # Discard the figure (otherwise the text will be overwritten
