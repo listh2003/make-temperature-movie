@@ -123,7 +123,7 @@ def main():
     for time in range(minTime, maxTime):
 
         # Set up for larger image.
-        figSize = [6, 3]
+        figSize = [12, 6]
         fig = plt.figure(figsize=figSize, dpi=200)
         rect = 0,0,200*figSize[0],200*figSize[1]
         fig.add_axes(rect)
@@ -164,7 +164,7 @@ def main():
 		 
 	# Draw a line along the division between the two halves.
 	plt.plot([0, 0], [-90, 90], color='gray', linewidth=3)
-	plt.plot([-179, -179], [-90, 90], color='gray', linewidth=3)
+	plt.plot([-179.8, -179.8], [-90, 90], color='gray', linewidth=3)
 
        
         # Now save the plot in an image file.  The files are numbered sequentially, starting
